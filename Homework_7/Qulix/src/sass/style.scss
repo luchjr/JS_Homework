@@ -25,6 +25,7 @@ h1 {
     font-family: 'Roboto Slab', serif;
     font-weight: 300;
     span {
+        cursor: pointer;
         display: block;
         margin-left: 28px;
         border-bottom: dashed 1px;
@@ -225,6 +226,7 @@ h1 {
         background-origin: content-box; 
     }
     &__new-post {
+        cursor: pointer;
         padding: 0 10px;
         align-self: center;
         color: $main-txt-color;
@@ -232,6 +234,7 @@ h1 {
         font-size: 12px;
     }
     i {
+        cursor: pointer;
         align-self: center;
         color: $main-txt-color; 
     }
