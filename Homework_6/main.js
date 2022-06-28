@@ -33,12 +33,12 @@ function Cat(name) {
         animalFeed.call(self);
         console.log('Кот доволен ^_^');
         return self;
-    }
+    };
 
     self.stroke = function () {
         console.log('Гладим кота.');
         return self;
-    }
+    };
 }
 
 var barsik = new Cat('Барсик');
