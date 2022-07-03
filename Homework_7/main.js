@@ -107,40 +107,39 @@ console.log(clonedObj);
 
 function isEqualObjects(initialObj, clonedObj) {
 
-    var answer;
+    if (Object.keys(initialObj).length !== Object.keys(clonedObj).length) {
+
+        return false;
+    }
+
+    var answer = true;
 
     for (var k in initialObj) {
-        if (answer === false) {
-            break;
-        } else {
-            answer = true;
-        }
 
         if (typeof (initialObj[k]) !== typeof (clonedObj[k])) {
 
             return false;
+        } else if ((Array.isArray(initialObj[k])) || (typeof (initialObj[k]) == 'object' && initialObj[k] !== null)) {
+            answer = isEqualObjects(initialObj[k], clonedObj[k]);
 
-        } else if ( (Array.isArray(initialObj[k])) || (typeof (initialObj[k]) == 'object' && initialObj[k] !== null) ) {
-            if (Object.keys(initialObj[k]).length !== Object.keys(clonedObj[k]).length) {
+            if (answer === false) {
 
-                return false;
-
-            } else {
-                answer = isEqualObjects(initialObj[k], clonedObj[k]);
+                break;
             }
-        } else if ( (typeof (initialObj[k]) == 'function') ) {
-            if (initialObj[k].toString() !== clonedObj[k].toString()) {
-                return false;
-            }
+        } else if ((typeof (initialObj[k]) == 'function')) {
             
-        } else if ((initialObj[k] !== clonedObj[k]) ) {
+            if (initialObj[k].toString() !== clonedObj[k].toString()) {
+
+                return false;
+            }
+
+        } else if ((initialObj[k] !== clonedObj[k])) {
 
             return false;
         }
-
     }
 
     return answer;
 }
 
-isEqualObjects(initialObj, clonedObj);
+console.log(isEqualObjects(initialObj, clonedObj));
