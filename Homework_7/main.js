@@ -1,31 +1,64 @@
 //Задание 1
 
 function Animal(name) {
-    this._foodAmount = 50;
-
-    Animal.prototype._formatFoodAmount = function () {
-        return this._foodAmount + ' гр.';
-    };
-
-    Animal.prototype.dailyNorm = function (amount) {
-
-        this._amount = amount;
-
-        if (!arguments.length) return this._formatFoodAmount();
-
-        if (this._amount < 30 || this._amount > 100) {
-            return 'Недопустимое количество корма.';
-        }
-
-        this._foodAmount = this._amount;
-    };
 
     this.name = name;
-
-    Animal.prototype.feed = function () {
-        console.log('Насыпаем в миску ' + this.dailyNorm() + ' корма.');
-    };
 }
+
+Animal.prototype._formatFoodAmount = function () {
+
+    this._foodAmount = 50;
+
+    return this._foodAmount + ' гр.';
+};
+
+Animal.prototype.dailyNorm = function (amount) {
+
+    if (!arguments.length) return this._formatFoodAmount();
+
+    if (this._amount < 30 || this._amount > 100) {
+        return 'Недопустимое количество корма.';
+    }
+
+    this._foodAmount = this._amount;
+};
+
+Animal.prototype.feed = function () {
+    console.log('Насыпаем в миску ' + this.dailyNorm() + ' корма.');
+};
+
+
+function Cat(name) {
+    Animal.apply(this, arguments);
+}
+
+Cat.prototype = Object.create(Animal.prototype);
+Cat.prototype.constructor = Cat;
+
+Cat.prototype.feed = function () {
+    Animal.prototype.feed.apply(this);
+    console.log('Кот доволен ^_^');
+    return this;
+};
+
+Cat.prototype.stroke = function () {
+    console.log('Гладим кота.');
+    return this;
+};
+
+var barsik = new Cat('Барсик');
+
+console.log(barsik.dailyNorm());
+barsik.feed();
+
+console.log(barsik.dailyNorm(200));
+barsik.feed();
+
+console.log(barsik.dailyNorm(75));
+barsik.feed();
+
+barsik.stroke().feed().stroke().feed().stroke().stroke();
+
 
 
 function Cat(name) {
@@ -119,10 +152,10 @@ function isEqualObjects(initialObj, clonedObj) {
         if (typeof (initialObj[k]) !== typeof (clonedObj[k])) {
 
             return false;
-        } else if ((Array.isArray(initialObj[k])) || (typeof (initialObj[k]) == 'object' && initialObj[k] !== null)) {
+        } else if ((Array.isArray(initialObj[k])) || (typeof (initialObj[k]) == 'object' && initialObj[k])) {
             answer = isEqualObjects(initialObj[k], clonedObj[k]);
 
-            if (answer === false) {
+            if (!answer) {
 
                 break;
             }
