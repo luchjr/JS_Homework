@@ -1,31 +1,33 @@
 //Задание 1
 
 function Animal(name) {
-    this._foodAmount = 50;
-
-    Animal.prototype._formatFoodAmount = function () {
-        return this._foodAmount + ' гр.';
-    };
-
-    Animal.prototype.dailyNorm = function (amount) {
-
-        this._amount = amount;
-
-        if (!arguments.length) return this._formatFoodAmount();
-
-        if (this._amount < 30 || this._amount > 100) {
-            return 'Недопустимое количество корма.';
-        }
-
-        this._foodAmount = this._amount;
-    };
 
     this.name = name;
 
-    Animal.prototype.feed = function () {
-        console.log('Насыпаем в миску ' + this.dailyNorm() + ' корма.');
-    };
+    this._foodAmount = 50;
 }
+
+Animal.prototype._formatFoodAmount = function () {
+
+    return this._foodAmount + ' гр.';
+};
+
+Animal.prototype.dailyNorm = function (amount) {
+
+    this._amount = amount;
+
+    if (!arguments.length) return this._formatFoodAmount();
+
+    if (this._amount < 30 || this._amount > 100) {
+        return 'Недопустимое количество корма.';
+    }
+
+    this._foodAmount = this._amount;
+};
+
+Animal.prototype.feed = function () {
+    console.log('Насыпаем в миску ' + this.dailyNorm() + ' корма.');
+};
 
 
 function Cat(name) {
@@ -119,10 +121,10 @@ function isEqualObjects(initialObj, clonedObj) {
         if (typeof (initialObj[k]) !== typeof (clonedObj[k])) {
 
             return false;
-        } else if ((Array.isArray(initialObj[k])) || (typeof (initialObj[k]) == 'object' && initialObj[k] !== null)) {
+        } else if ((Array.isArray(initialObj[k])) || (typeof (initialObj[k]) == 'object' && initialObj[k])) {
             answer = isEqualObjects(initialObj[k], clonedObj[k]);
 
-            if (answer === false) {
+            if (!answer) {
 
                 break;
             }
