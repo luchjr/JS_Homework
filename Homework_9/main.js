@@ -68,12 +68,12 @@ function findFirstMostRepeatedWord(text) {
         counter = 1,
         mostRepeatedWord;
 
-    outer: for (var i = 0; i < words.length; i++) {
+    for (var i = 0; i < words.length; i++) {
 
         if (!checkedWords.length) {
             checkedWords.push(words[i]);
         } else if (checkedWords.indexOf(words[i]) > -1) {
-            continue outer;
+            continue;
         } else {
             checkedWords.push(words[i]);
         }
