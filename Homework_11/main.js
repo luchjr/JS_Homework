@@ -12,17 +12,18 @@ inputs.forEach(function (item) {
 button.addEventListener('click', drawChessBoard);
 
 function toggleButton(evt) {
-    var target = evt.target;
+    var check = true;
 
-    for (var i = 0; i < inputs.length; i++) {
-        
-        if ((target.value == '' || inputs[i].value == '') && button.hasAttribute('disabled')) {
-            break;
-        } else if ((target.value != '' || inputs[i].value != '') && button.hasAttribute('disabled')) {
-            button.removeAttribute('disabled');
-        } else if ((target.value == '' || inputs[i].value == '') && !button.hasAttribute('disabled')) {
-            button.setAttribute('disabled', '');
+    inputs.forEach(function(item) {
+        if (item.value == '') {
+            check = false;
         }
+    }); 
+
+    if (check && button.hasAttribute('disabled')) {
+        button.removeAttribute('disabled');
+    } else if (!check && !button.hasAttribute('disabled')) {
+        button.setAttribute('disabled', '');
     }
 }
 
