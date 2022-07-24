@@ -14,12 +14,15 @@ button.addEventListener('click', drawChessBoard);
 function toggleButton(evt) {
     var target = evt.target;
 
-    if (xInput.value != '' && yInput.value != '') {
-        button.removeAttribute('disabled');
-    }
-
-    if ((target.value == '')) {
-        button.setAttribute('disabled', '');
+    for (var i = 0; i < inputs.length; i++) {
+        
+        if ((target.value == '' || inputs[i].value == '') && button.hasAttribute('disabled')) {
+            break;
+        } else if ((target.value != '' || inputs[i].value != '') && button.hasAttribute('disabled')) {
+            button.removeAttribute('disabled');
+        } else if ((target.value == '' || inputs[i].value == '') && !button.hasAttribute('disabled')) {
+            button.setAttribute('disabled', '');
+        }
     }
 }
 
@@ -37,9 +40,7 @@ function validateInput() {
     });
 
     if (wrongInputName == '') {
-        x = +xInput.value;
-        y = +yInput.value;
-
+        
         return true;
     }
 
@@ -54,6 +55,8 @@ function drawChessBoard() {
         var table = document.createElement('table'),
             row;
         button.setAttribute('disabled', '');
+        x = +xInput.value;
+        y = +yInput.value;
         xInput.value = '';
         yInput.value = '';
         container.innerHTML = '';
