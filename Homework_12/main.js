@@ -56,11 +56,11 @@ function showUsersList() {
     container.appendChild(tabsBlock);
     container.appendChild(info);
 
-    for (var i = 1; i <= usersData.length; i++) {
+    for (var i = 0; i < usersData.length; i++) {
         tab = document.createElement('div');
-        i === 1 ? tab.classList.add('tab', 'tab_active') : tab.classList.add('tab');
-        tab.setAttribute('data-index', i - 1);
-        tab.innerText = 'User ' + i;
+        i === 0 ? tab.classList.add('tab', 'tab_active') : tab.classList.add('tab');
+        tab.dataset.index = i;
+        tab.innerText = 'User ' + (i + 1);
         tabsBlock.appendChild(tab);
     }
 
@@ -76,16 +76,15 @@ function showInfo(i) {
 }
 
 function toggleTabs(evt) {
-    var target = evt.target,
-        index = +target.getAttribute('data-index');
+    var target = evt.target;
 
-    if (target.classList.contains('tab')) {
+    if (target.classList.contains('tab') && !target.classList.contains('tab_active')) {
         for (var i = 0; i < usersData.length; i++) {
             if (this.children[i].classList.contains('tab_active')) {
                 this.children[i].classList.remove('tab_active');
             }
         }
         target.classList.add('tab_active');
-        showInfo(index);
+        showInfo(+target.dataset.index);
     }
 }
