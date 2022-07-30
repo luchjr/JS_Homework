@@ -76,15 +76,12 @@ function showInfo(i) {
 }
 
 function toggleTabs(evt) {
-    var target = evt.target;
-
+    var target = evt.target,
+        previousTab = this.getElementsByClassName('tab_active')[0];
+ 
     if (target.classList.contains('tab') && !target.classList.contains('tab_active')) {
-        for (var i = 0; i < usersData.length; i++) {
-            if (this.children[i].classList.contains('tab_active')) {
-                this.children[i].classList.remove('tab_active');
-            }
-        }
         target.classList.add('tab_active');
+        previousTab.classList.remove('tab_active');
         showInfo(+target.dataset.index);
     }
 }
