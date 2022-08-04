@@ -1,7 +1,7 @@
 //Задание 1
 
 {
-    let emailTestRe = new RegExp('^([a-z]{3,10})_[a-z]{3,10}(-\\d{4})?' +
+    let emailTestRe = new RegExp('^[a-z]{3,10}_[a-z]{3,10}(-\\d{4})?' +
         '@[a-z0-9]{1,10}[a-z0-9-.]?[a-z0-9]{1,10}\\.com$', 'i');
 
     emailTestRe.test('name_surname@a234567890.123456789B.com');
@@ -11,7 +11,7 @@
 
 {
     let emailTestRe = new RegExp('^[a-z]{3,10}_[a-z]{3,10}(-\\d{4})?' +
-        '@(?=[a-z0-9]+[a-z0-9-.]?[a-z0-9]+(?=\\.com$))[a-z0-9-.]{2,21}\\.com$', 'i');
+        '@(?=[a-z0-9]+[a-z0-9-.]?[a-z0-9]+(?=\\.com$)).{2,21}\\.com$', 'i');
 
     emailTestRe.test('name_surname-9528@a234567890123456789.B.com');
 }
